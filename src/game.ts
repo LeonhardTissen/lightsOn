@@ -2,10 +2,8 @@ import { Container, Sprite } from 'pixi.js';
 import { app } from './pixi/app';
 import { getTexture } from './pixi/assets';
 import { Level, levels } from './levels';
-import on from './assets/audio/on.mp3';
-import off from './assets/audio/off.mp3';
-import win from './assets/audio/win.mp3';
-import next from './assets/audio/next.mp3';
+import { Howl } from 'howler';
+import spriteData from './assets/sprite.json';
 
 const tileSize = 160;
 
@@ -28,17 +26,20 @@ const levelText = document.getElementById('levelText') as HTMLElement;
 const restart = document.getElementById('restart') as HTMLElement;
 const bestpossible = document.getElementById('bestpossibletext') as HTMLElement;
 
-const sound = {
-	on: new Audio(on),
-	off: new Audio(off),
-	next: new Audio(next),
-	win: new Audio(win),
-};
+const sound = new Howl({
+	src: spriteData.urls,
+	sprite: {
+		next: [spriteData.sprite.next[0], spriteData.sprite.next[1]],
+		off: [spriteData.sprite.off[0], spriteData.sprite.off[1]],
+		on: [spriteData.sprite.on[0], spriteData.sprite.on[1]],
+		win: [spriteData.sprite.win[0], spriteData.sprite.win[1]],
+	},
+});
 
 function restartGame(): void {
 	if (levelTransition) return;
 	startGame();
-	sound.off.play();
+	sound.play('off');
 }
 restart.addEventListener('click', restartGame);
 
@@ -119,7 +120,7 @@ function flipPlus(posId: number): void {
 	flipLight(posId);
 	const light = lightLookup[posId];
 	if (light !== undefined) {
-		sound[light.lit ? 'off' : 'on'].play();
+		sound.play(light.lit ? 'off' : 'on');
 	}
 
 	if (x > 0) {
@@ -155,7 +156,7 @@ function checkWin(): void {
 
 	overlay.style.pointerEvents = 'all';
 	overlay.style.opacity = '1';
-	sound.win.play();
+	sound.play('win');
 
 	setTimeout(() => {
 		levelText.style.opacity = '1';
@@ -167,7 +168,7 @@ function checkWin(): void {
 	}
 
 	setTimeout(() => {
-		sound.next.play();
+		sound.play('next');
 		levelNum.innerText = `${currentLevel + 1}`;
 		createLevel(nextLevel);
 	}, 2000);

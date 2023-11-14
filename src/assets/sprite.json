@@ -1,9 +1,9 @@
 {
   "urls": [
-    "src/assets/audio/sprite.ogg",
-    "src/assets/audio/sprite.m4a",
-    "src/assets/audio/sprite.mp3",
-    "src/assets/audio/sprite.ac3"
+    "audio/sprite.ogg",
+    "audio/sprite.m4a",
+    "audio/sprite.mp3",
+    "audio/sprite.ac3"
   ],
   "sprite": {
     "next": [
