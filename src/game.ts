@@ -25,6 +25,8 @@ const levelNum = document.getElementById('levelNum') as HTMLElement;
 const levelText = document.getElementById('levelText') as HTMLElement;
 const restart = document.getElementById('restart') as HTMLElement;
 const bestpossible = document.getElementById('bestpossibletext') as HTMLElement;
+const userclicks = document.getElementById('userclicks') as HTMLElement;
+let moves: number = 0;
 
 const sound = new Howl({
 	src: spriteData.urls,
@@ -62,6 +64,8 @@ function createLevel(level: Level): void {
 	container = new Container();
 	width = w;
 	height = h;
+	moves = 0;
+	userclicks.innerText = '0';
 
 	if (data.length !== width * height) {
 		throw new Error(`Invalid data length ${width * height} !== ${data.length}`);
@@ -118,6 +122,8 @@ function flipPlus(posId: number): void {
 	const x = posId % width;
 	const y = Math.floor(posId / width);
 	flipLight(posId);
+	moves ++;
+	userclicks.innerText = `${moves}`;
 	const light = lightLookup[posId];
 	if (light !== undefined) {
 		sound.play(light.lit ? 'off' : 'on');
@@ -148,6 +154,7 @@ function flipLight(id: number): void {
 function checkWin(): void {
 	const hasWon = !Object.values(lightLookup).some((light) => !light.lit);
 
+	exportLevel();
 	if (!hasWon) return;
 
 	levelTransition = true;
@@ -181,16 +188,16 @@ function checkWin(): void {
 	}, 3000);
 }
 
-// function setCharAt(str: string, index: number, char: string): string {
-// 	if(index > str.length - 1) return str;
-// 	return str.substring(0,index) + char + str.substring(index+1);
-// }
+function setCharAt(str: string, index: number, char: string): string {
+	if(index > str.length - 1) return str;
+	return str.substring(0,index) + char + str.substring(index+1);
+}
 
-// function exportLevel(): void {
-// 	let output = ' '.repeat(width * height);
-// 	for (const [keyStr, value] of Object.entries(lightLookup)) {
-// 		const key = parseInt(keyStr);
-// 		output = setCharAt(output, key, value.lit ? 'X' : 'O');
-// 	}
-// 	console.log(output);
-// }
+function exportLevel(): void {
+	let output = ' '.repeat(width * height);
+	for (const [keyStr, value] of Object.entries(lightLookup)) {
+		const key = parseInt(keyStr);
+		output = setCharAt(output, key, value.lit ? 'X' : 'O');
+	}
+	console.log(output);
+}
