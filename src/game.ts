@@ -81,30 +81,10 @@ function createLevel(level: Level): void {
 
 				sprite.interactive = true;
 				sprite.on('click', () => {
-					flipLight(posId);
-					const light = lightLookup[posId];
-					if (light !== undefined) {
-						if (light.lit) {
-							sound.off.play();
-						} else {
-							sound.on.play();
-						}
-					}
-
-					if (x > 0) {
-						flipLight(posId - 1);
-					}
-					if (x < width - 1) {
-						flipLight(posId + 1);
-					}
-					if (y > 0) {
-						flipLight(posId - width);
-					}
-					if (y < height - 1) {
-						flipLight(posId + width);
-					}
-
-					checkWin();
+					flipPlus(posId);
+				});
+				sprite.on('touchstart', () => {
+					flipPlus(posId);
 				});
 
 				// sprite.on('rightclick', () => {
@@ -133,6 +113,34 @@ function positionLevelContainer(): void {
 }
 window.addEventListener('resize', positionLevelContainer);
 
+function flipPlus(posId: number): void {
+	const x = posId % width;
+	const y = Math.floor(posId / width);
+	flipLight(posId);
+	const light = lightLookup[posId];
+	if (light !== undefined) {
+		if (light.lit) {
+			sound.off.play();
+		} else {
+			sound.on.play();
+		}
+	}
+
+	if (x > 0) {
+		flipLight(posId - 1);
+	}
+	if (x < width - 1) {
+		flipLight(posId + 1);
+	}
+	if (y > 0) {
+		flipLight(posId - width);
+	}
+	if (y < height - 1) {
+		flipLight(posId + width);
+	}
+
+	checkWin();
+}
 function flipLight(id: number): void {
 	const light = lightLookup[id];
 	if (light === undefined) return;
