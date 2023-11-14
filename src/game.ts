@@ -17,6 +17,7 @@ interface Light {
 let currentLevel: number = 0;
 let width: number = 0;
 let height: number = 0;
+let levelTransition: boolean = false;
 
 let container: null | Container = null;
 let lightLookup: Record<number, Light> = {};
@@ -24,6 +25,8 @@ let lightLookup: Record<number, Light> = {};
 const overlay = document.getElementById('overlay') as HTMLElement;
 const levelNum = document.getElementById('levelNum') as HTMLElement;
 const levelText = document.getElementById('levelText') as HTMLElement;
+const restart = document.getElementById('restart') as HTMLElement;
+const bestpossible = document.getElementById('bestpossibletext') as HTMLElement;
 
 const sound = {
 	on: new Audio(on),
@@ -32,18 +35,24 @@ const sound = {
 	win: new Audio(win),
 };
 
+function restartGame(): void {
+	if (levelTransition) return;
+	startGame();
+	sound.off.play();
+}
+restart.addEventListener('click', restartGame);
+
 export function startGame(): void {
 	createLevel(levels[currentLevel]);
 }
 document.body.addEventListener('keydown', (ev) => {
 	if (ev.code === 'KeyR') {
-		startGame();
-		sound.next.play();
+		restartGame();
 	}
 });
 
 function createLevel(level: Level): void {
-	const [w, h, data] = level;
+	const [w, h, best, data] = level;
 	if (container !== null) {
 		container.destroy({ children: true });
 	}
@@ -56,6 +65,8 @@ function createLevel(level: Level): void {
 	if (data.length !== width * height) {
 		throw new Error(`Invalid data length ${width * height} !== ${data.length}`);
 	}
+
+	bestpossible.innerText = `${best}`;
 
 	for (let x = 0; x < width; x ++) {
 		for (let y = 0; y < height; y ++) {
@@ -134,6 +145,7 @@ function checkWin(): void {
 
 	if (!hasWon) return;
 
+	levelTransition = true;
 	currentLevel ++;
 	const nextLevel = levels[currentLevel];
 
@@ -160,6 +172,7 @@ function checkWin(): void {
 		overlay.style.opacity = '0';
 		overlay.style.pointerEvents = 'none';
 		levelText.style.opacity = '0';
+		levelTransition = false;
 	}, 3000);
 }
 

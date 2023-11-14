@@ -32,10 +32,37 @@ body {
     opacity: 0;
     user-select: none;
     pointer-events: none;
+    z-index: 2;
 
     #levelText {
         font-size: 72px;
         transition: opacity 1s linear;
         opacity: 0;
     }
+}
+#restart {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+
+    svg {
+        width: 32px;
+        height: 32px;
+        margin: 16px;
+        opacity: 0.2;
+        cursor: pointer;
+        transition: transform 0.4s ease-out;
+    }
+}
+#restart:hover svg {
+    opacity: 1;
+    transform: rotateZ(-90deg);
+}
+#bestpossible {
+    position: fixed;
+    margin: 16px;
+    bottom: 0;
+    left: 0;
+    font-size: 24px;
+    opacity: 0.2;
 }
