@@ -35,6 +35,12 @@ const sound = {
 export function startGame(): void {
 	createLevel(levels[currentLevel]);
 }
+document.body.addEventListener('keydown', (ev) => {
+	if (ev.code === 'KeyR') {
+		startGame();
+		sound.next.play();
+	}
+});
 
 function createLevel(level: Level): void {
 	const [w, h, data] = level;
@@ -157,10 +163,10 @@ function checkWin(): void {
 	}, 3000);
 }
 
-function setCharAt(str: string, index: number, char: string): string {
-	if(index > str.length - 1) return str;
-	return str.substring(0,index) + char + str.substring(index+1);
-}
+// function setCharAt(str: string, index: number, char: string): string {
+// 	if(index > str.length - 1) return str;
+// 	return str.substring(0,index) + char + str.substring(index+1);
+// }
 
 // function exportLevel(): void {
 // 	let output = ' '.repeat(width * height);
