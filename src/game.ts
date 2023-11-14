@@ -32,7 +32,7 @@ let moves: number = 0;
 
 const saveData = localStorage.getItem(LSI);
 if (saveData !== null) {
-	const levelSaved = parseInt(saveData);
+	const levelSaved = Math.min(levels.length - 1, parseInt(saveData));
 	maximumLevel = levelSaved;
 	currentLevel = levelSaved;
 	levelNum.innerText = `${currentLevel + 1}`;
