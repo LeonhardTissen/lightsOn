@@ -90,9 +90,9 @@ function createLevel(level: Level): void {
 					checkWin();
 				});
 
-				sprite.on('rightclick', () => {
-					flipLight(posId);
-				});
+				// sprite.on('rightclick', () => {
+				// 	flipLight(posId);
+				// });
 
 				sprite.cursor = 'pointer';
 			}
@@ -162,11 +162,11 @@ function setCharAt(str: string, index: number, char: string): string {
 	return str.substring(0,index) + char + str.substring(index+1);
 }
 
-function exportLevel(): void {
-	let output = ' '.repeat(width * height);
-	for (const [keyStr, value] of Object.entries(lightLookup)) {
-		const key = parseInt(keyStr);
-		output = setCharAt(output, key, value.lit ? 'X' : 'O');
-	}
-	console.log(output);
-}
+// function exportLevel(): void {
+// 	let output = ' '.repeat(width * height);
+// 	for (const [keyStr, value] of Object.entries(lightLookup)) {
+// 		const key = parseInt(keyStr);
+// 		output = setCharAt(output, key, value.lit ? 'X' : 'O');
+// 	}
+// 	console.log(output);
+// }
