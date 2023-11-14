@@ -135,7 +135,7 @@ function flipPlus(posId: number): void {
 	const x = posId % width;
 	const y = Math.floor(posId / width);
 	flipLight(posId);
-	navigator.vibrate?.(20);
+	navigator.vibrate?.(50);
 	moves ++;
 	userclicks.innerText = `${moves}`;
 	const light = lightLookup[posId];
