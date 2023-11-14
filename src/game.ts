@@ -98,10 +98,7 @@ function createLevel(level: Level): void {
 				lightLookup[posId] = { sprite, lit };
 
 				sprite.interactive = true;
-				sprite.on('click', () => {
-					flipPlus(posId);
-				});
-				sprite.on('touchstart', () => {
+				sprite.on('pointerdown', () => {
 					flipPlus(posId);
 				});
 
