@@ -124,8 +124,8 @@ function flipLight(id: number): void {
 }
 
 function checkWin(): void {
-	exportLevel();
 	const hasWon = !Object.values(lightLookup).some((light) => !light.lit);
+
 	if (!hasWon) return;
 
 	currentLevel ++;
