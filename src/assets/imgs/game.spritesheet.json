@@ -1,0 +1,52 @@
+{
+	"meta": {
+		"image": "@ref(./game.spritesheet.png)",
+		"size": {
+			"w": 320,
+			"h": 160
+		},
+		"scale": "1"
+	},
+	"frames": {
+		"glasslit.png": {
+			"frame": {
+				"x": 0,
+				"y": 0,
+				"w": 160,
+				"h": 160
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 160,
+				"h": 160
+			},
+			"sourceSize": {
+				"w": 160,
+				"h": 160
+			}
+		},
+		"glass.png": {
+			"frame": {
+				"x": 160,
+				"y": 0,
+				"w": 160,
+				"h": 160
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 160,
+				"h": 160
+			},
+			"sourceSize": {
+				"w": 160,
+				"h": 160
+			}
+		}
+	}
+}
