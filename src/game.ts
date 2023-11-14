@@ -12,13 +12,7 @@ interface Light {
 	sprite: Sprite;
 }
 
-let currentLevel: number = 0;
-let width: number = 0;
-let height: number = 0;
-let levelTransition: boolean = false;
-
-let container: null | Container = null;
-let lightLookup: Record<number, Light> = {};
+const LSI = 'lightson-maxlevel';
 
 const overlay = document.getElementById('overlay') as HTMLElement;
 const levelNum = document.getElementById('levelNum') as HTMLElement;
@@ -26,7 +20,26 @@ const levelText = document.getElementById('levelText') as HTMLElement;
 const restart = document.getElementById('restart') as HTMLElement;
 const bestpossible = document.getElementById('bestpossibletext') as HTMLElement;
 const userclicks = document.getElementById('userclicks') as HTMLElement;
+const levelback = document.getElementById('levelback') as HTMLElement;
+const levelforward = document.getElementById('levelforward') as HTMLElement;
+
+let currentLevel: number = 0;
+let maximumLevel: number = 0;
+let width: number = 0;
+let height: number = 0;
+let levelTransition: boolean = false;
 let moves: number = 0;
+
+const saveData = localStorage.getItem(LSI);
+if (saveData !== null) {
+	const levelSaved = parseInt(saveData);
+	maximumLevel = levelSaved;
+	currentLevel = levelSaved;
+	levelNum.innerText = `${currentLevel + 1}`;
+}
+
+let container: null | Container = null;
+let lightLookup: Record<number, Light> = {};
 
 const sound = new Howl({
 	src: spriteData.urls,
@@ -159,6 +172,11 @@ function checkWin(): void {
 
 	levelTransition = true;
 	currentLevel ++;
+	if (currentLevel > maximumLevel) {
+		maximumLevel = currentLevel;
+		localStorage.setItem(LSI, `${maximumLevel}`);
+	}
+
 	const nextLevel = levels[currentLevel];
 
 	overlay.style.pointerEvents = 'all';
@@ -201,3 +219,19 @@ function exportLevel(): void {
 	}
 	console.log(output);
 }
+
+levelback.addEventListener('click', () => {
+	if (currentLevel === 0) return;
+	currentLevel --;
+	createLevel(levels[currentLevel]);
+	levelNum.innerText = `${currentLevel + 1}`;
+	sound.play('on');
+});
+
+levelforward.addEventListener('click', () => {
+	if (currentLevel >= maximumLevel) return;
+	currentLevel ++;
+	createLevel(levels[currentLevel]);
+	levelNum.innerText = `${currentLevel + 1}`;
+	sound.play('on');
+});

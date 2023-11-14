@@ -38,13 +38,28 @@
 	<div id="overlay">
 		<h1 id="levelText">Level <span id="levelNum">1</span></h1>
 	</div>
-    <span id="bestpossible">
-        <span id="userclicks">0</span>/<span id="bestpossibletext">2</span> clicks</span>
-    <div id="restart">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
-            <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
-        </svg>
+    <div id="bottombar">
+        <span id="bestpossible">
+            <span id="userclicks">0</span>/<span id="bestpossibletext"></span> clicks
+        </span>
+        <div id="levels">
+            <div class="icon" id="levelback">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" stroke="currentColor" fill="none" viewBox="0 0 16 16">
+                    <path d="M13,3 13,13 3,8 13,3"/>
+                </svg>
+            </div>
+            <div class="icon" id="levelforward">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" stroke="currentColor" fill="none" viewBox="0 0 16 16">
+                    <path d="M3,3 3,13 13,8 3,3"/>
+                </svg>
+            </div>
+        </div>
+        <div class="icon" id="restart">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
+                <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
+            </svg>
+        </div>
     </div>
 	<%= htmlWebpackPlugin.tags.bodyTags %>
 </body>

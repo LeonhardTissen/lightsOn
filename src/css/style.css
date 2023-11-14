@@ -40,29 +40,31 @@ body {
         opacity: 0;
     }
 }
-#restart {
+#bottombar {
     position: fixed;
     bottom: 0;
-    right: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.icon {
     cursor: pointer;
-
-    svg {
-        width: 32px;
-        height: 32px;
-        margin: 16px;
-        opacity: 0.2;
-        transition: transform 0.4s ease-out;
-    }
+}
+svg {
+    width: 32px;
+    height: 32px;
+    margin: 16px;
+    opacity: 0.2;
+    transition: transform 0.4s ease-out;
+}
+.icon:hover svg {
+    opacity: 1;
 }
 #restart:hover svg {
-    opacity: 1;
     transform: rotateZ(-90deg);
 }
 #bestpossible {
-    position: fixed;
     margin: 16px;
-    bottom: 0;
-    left: 0;
     font-size: 24px;
     color: #414141;
 }
@@ -71,4 +73,7 @@ body {
 }
 #bestpossibletext {
     color: #414141;
+}
+#levels {
+    display: flex;
 }
