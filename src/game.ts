@@ -119,11 +119,7 @@ function flipPlus(posId: number): void {
 	flipLight(posId);
 	const light = lightLookup[posId];
 	if (light !== undefined) {
-		if (light.lit) {
-			sound.off.play();
-		} else {
-			sound.on.play();
-		}
+		sound[light.lit ? 'off' : 'on'].play();
 	}
 
 	if (x > 0) {
