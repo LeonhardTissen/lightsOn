@@ -2,9 +2,6 @@ import { loadGameAssets } from './pixi/assets';
 import './pixi/app';
 
 import './css/style.css';
-import { createLevel } from './level';
-import { levels } from './levels';
+import { startGame } from './game';
 
-loadGameAssets().then(() => {
-	createLevel(levels[0]);
-});
+loadGameAssets().then(startGame);
