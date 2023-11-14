@@ -1,7 +1,6 @@
 import { Application } from 'pixi.js';
 
 export const app = new Application<HTMLCanvasElement>();
-window.__PIXI_APP__ = app;
 
 function resize(): void {
 	app.renderer.resize(window.innerWidth, window.innerHeight);
