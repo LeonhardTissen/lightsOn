@@ -98,5 +98,5 @@ module.exports = (_env, argv) => ({
 			],
 		}),
 	],
-	devtool: argv.mode === 'development' ? 'eval-source-map' : 'hidden-source-map',
+	devtool: argv.mode === 'development' ? 'eval-source-map' : false,
 });
