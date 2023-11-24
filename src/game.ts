@@ -174,7 +174,7 @@ function checkWin(): void {
 		maximumLevel = currentLevel;
 		localStorage.setItem(LSI, `${maximumLevel}`);
 	}
-	window.parent.postMessage({ type: 'lights', level: currentLevel });
+	window.parent.postMessage({ type: 'lights', level: currentLevel }, '*');
 
 	const nextLevel = levels[currentLevel];
 
