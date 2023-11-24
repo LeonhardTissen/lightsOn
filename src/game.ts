@@ -23,14 +23,7 @@ const userclicks = document.getElementById('userclicks') as HTMLElement;
 const levelback = document.getElementById('levelback') as HTMLElement;
 const levelforward = document.getElementById('levelforward') as HTMLElement;
 
-declare global {
-	interface Window {
-		currentLevel?: number;
-	}
-}
-
 let currentLevel: number = 0;
-window.currentLevel = currentLevel;
 let maximumLevel: number = 0;
 let width: number = 0;
 let height: number = 0;
@@ -180,6 +173,7 @@ function checkWin(): void {
 	if (currentLevel > maximumLevel) {
 		maximumLevel = currentLevel;
 		localStorage.setItem(LSI, `${maximumLevel}`);
+		window.postMessage({ type: 'lights', level: maximumLevel });
 	}
 
 	const nextLevel = levels[currentLevel];
